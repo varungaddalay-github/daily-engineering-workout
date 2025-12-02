@@ -12,23 +12,6 @@ The goal is to build a strong, multi-disciplinary skill set that includes:
 
 - BigTech-style performance & scalability thinking
 
-📂 Repository Structure
-.
-├── README.md
-├── problems/
-│   ├── batch_01.py
-│   ├── batch_02.py
-│   ├── batch_03.py
-│   ├── ...
-│   └── batch_N.py
-├── terraform/
-│   └── s3_versioned_bucket/
-│       ├── main.tf
-│       ├── variables.tf
-│       └── outputs.tf
-└── utils/
-    └── linked_list_helpers.py
-
 
 This repo trains multi-disciplinary engineering instincts:
 
