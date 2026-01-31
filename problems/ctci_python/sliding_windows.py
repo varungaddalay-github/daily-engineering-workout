@@ -29,20 +29,20 @@ Instead,
 
 """
 
-def most_sales_7_days(sales):    
+def most_sales_k_days(sales, k):    
     l, r = 0, 0
 
     curr_sum = 0
-    max_sum = 0
+    max_sum = float("-inf")
 
     while r < len(sales):
         curr_sum += sales[r]
         r += 1
-        if r - l == 7:
+        if r - l == k:
             max_sum = max(max_sum, curr_sum)
             curr_sum -= sales[l]
             l += 1
-    return max_sum
+    return max_sum if max_sum != float("-inf") else 0
 
 
 
@@ -84,7 +84,66 @@ def longest_substring_k_distinct(s):
     return max_len
 
 
+"""
+📋 SLIDING WINDOW PROBLEM - Interview Starting Now
+Real-World Context:
+You're working on a data quality system at Meta that processes user-generated text. 
+We need to identify the longest sequence of characters in a string where we can replace up to K characters to make all characters the same. 
+This helps us detect spam patterns where bots make small variations to bypass filters.
 
+Problem Statement:
+You are given a string s and an integer k. You can choose up to k characters in the string and replace them with any other character.
+Return the length of the longest substring containing the same letter you can get after performing the above operations.
+
+s = "ABAB", k = 2
+
+ABAB -> We can either update to all A's or all B's
+
+AAAA -> the longest substring is 4 
+
+- Probably create a counter? {A: 2, B: 2}
+- Greedily pick the highest/ max freq key or character - TC: O(n), SC: O(n)
+- ABAB now, If we can use sliding window to calculate the longest substring. Initialize window using 2 pointers. 
+    - In the Sliding window, skip if the char is the same as the max freq char
+    - decrement the k value if the adjacent char is not equal to the max freq char
+    - Do this decrement until the k value is obeyed. and get the length of the curr window
+    - If the window condition fails when k == 0, then try to increment the left pointer
+- return if this reaches end
+
+- AAAB and k = 1
+- AAAA and k = 0
+return 
+
+
+s = "AABABBA", k = 1
+
+- AABABBA, k = 1
+- AAAABBA, k = 0
+- We see a distinct element and k = 0, then update the l pointer as well as k
+- A ABABBA, k = 1
+- A AAABBA, k = 0
+- Return
+
+
+Input: s = "AABABBA", k = 1
+
+AABABBA -> Try to update the first occurence? But how do we choose the first occurence?
+
+
+
+
+Examples:
+Example 1:
+Input: s = "ABAB", k = 2
+Output: 4
+Explanation: Replace the two 'A's with two 'B's or vice versa.
+Example 2:
+Input: s = "AABABBA", k = 1
+Output: 4
+Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
+The substring "BBBB" has the longest repeating letters, which is 4.
+
+"""
 
 
 
