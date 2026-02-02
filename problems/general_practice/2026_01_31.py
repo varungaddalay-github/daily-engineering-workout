@@ -350,6 +350,77 @@ def kth_largest(nums, k):
     return heap[0]
 
 
+"""
+Problem Statement:
+Given an array of intervals where intervals[i] = [start_i, end_i], 
+merge all overlapping intervals  
+and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+Examples:
+
+intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+
+
+intervals = [[1,3],[2,6],[8,10],[15,18]]
+               i     j
+
+- Merge all the overlapping intervals and return an array of non-overlapping intervals
+
+- Sort the array by the start_i
+- Compare the i[1] with j[0]. 
+    - if i[1] > j[0], then combine [i[0], j[1]]
+- We will use a stack to store the result and make sure we are comparing rightly
+
+- Stack to compare the adjacent elements
+
+
+intervals = [[1,3],[2,6],[8,10],[15,18]]
+                           i
+stack = [[1, 6], [8, 10], [15, 18]]
+node = 
+
+"""
+
+def merge_intervals(intervals):
+    sorted_intervals = sorted(intervals)
+    stack = [sorted_intervals[0]]    
+
+    for i in range(1, len(sorted_intervals)):
+        # compare the element on top of stack with the curr elem
+        if stack[-1][1] >= sorted_intervals[i][0]:            
+            node = stack.pop()
+            stack.append([node[0], max(node[1], sorted_intervals[i][1])])
+        else:
+            stack.append(sorted_intervals[i])
+
+    return [node for node in stack]
+
+
+
+
+"""
+Given an integer array nums and an integer k, 
+
+return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] 
+and abs(i - j) <= k. 
+
+Example 1:
+
+nums = [1,2,3,1], k = 3
+        i     j
+
+abs(i - j) <= k
+
+j <= i + k
+if nums[i] == nums[j]:
+return true
+
+- initialize i and j 
+- move j until it obeys j <= i + k
+- if the condition fails we can incrmenet i
+
+"""            
 
 
 
